@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Delta Precision Group provides engineering and geospatial production support for U.S. technical firms." />
+  <meta name="theme-color" content="#071827" />
+  <title>Delta Precision Group | Engineering & Geospatial Production Support</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --ink:#071827;
+      --ink-2:#0c2435;
+      --paper:#f7f9fa;
+      --mist:#eef3f6;
+      --line:#d6e0e6;
+      --muted:#61727f;
+      --cyan:#19b7c9;
+      --cyan-soft:#dff6f8;
+      --orange:#e68a45;
+      --white:#fff;
+      --radius:18px;
+      --max:1240px;
+      --shadow:0 18px 45px rgba(7,24,39,.08);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:var(--paper);
+      font-family:Inter,system-ui,sans-serif;
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+    }
+    a{color:inherit}
+    img,svg{max-width:100%;display:block}
+    button,a{font:inherit}
+    :focus-visible{outline:2px solid var(--cyan);outline-offset:4px}
+
+    .container{width:min(calc(100% - 40px), var(--max));margin-inline:auto}
+    .eyebrow{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--muted);
+      font:500 12px/1 "DM Mono",monospace;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+    .eyebrow::before{
+      content:"";
+      width:24px;height:1px;background:var(--cyan);
+    }
+    h1,h2,h3,h4{
+      margin:0;
+      font-family:"Space Grotesk",Inter,sans-serif;
+      letter-spacing:-.035em;
+      line-height:1.02;
+    }
+    p{margin:0;color:var(--muted)}
+    .mono{font-family:"DM Mono",monospace}
+
+    /* NAV */
+    .site-nav{
+      position:fixed; inset:0 0 auto 0;
+      z-index:50;
+      transition:.3s ease;
+      border-bottom:1px solid transparent;
+      color:#fff;
+    }
+    .site-nav.scrolled{
+      color:var(--ink);
+      background:rgba(247,249,250,.86);
+      backdrop-filter:blur(14px);
+      border-color:rgba(214,224,230,.9);
+    }
+    .nav-inner{height:78px;display:flex;align-items:center;justify-content:space-between}
+    .brand{
+      display:flex;align-items:center;gap:11px;
+      text-decoration:none;
+      font:700 14px/1 "Space Grotesk",sans-serif;
+      letter-spacing:.08em;
+    }
+    .brand-mark{
+      width:28px;height:28px;border:1px solid currentColor;position:relative;overflow:hidden;
+    }
+    .brand-mark::before,.brand-mark::after{
+      content:"";position:absolute;background:currentColor;opacity:.75;
+    }
+    .brand-mark::before{width:14px;height:1px;left:6px;top:8px;box-shadow:0 5px 0 currentColor,0 10px 0 currentColor}
+    .brand-mark::after{width:1px;height:16px;left:13px;top:6px}
+    .nav-links{display:flex;align-items:center;gap:30px}
+    .nav-links a{
+      text-decoration:none;font-size:14px;font-weight:600;color:inherit;position:relative;
+    }
+    .nav-links a::after{
+      content:"";position:absolute;left:0;right:100%;bottom:-7px;height:1px;background:var(--cyan);transition:.25s ease;
+    }
+    .nav-links a:hover::after{right:0}
+    .nav-cta{
+      padding:11px 17px;border:1px solid currentColor;text-decoration:none;
+      font-size:13px;font-weight:700;transition:.25s ease;
+    }
+    .nav-cta:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+    .site-nav:not(.scrolled) .nav-cta:hover{background:#fff;color:var(--ink);border-color:#fff}
+    .nav-toggle{display:none;background:none;border:0;color:inherit}
+
+    /* HERO */
+    .hero{
+      position:relative;overflow:hidden;
+      min-height:820px;
+      background:var(--ink);
+      color:#fff;
+      display:flex;align-items:center;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        radial-gradient(circle at 70% 35%, rgba(25,183,201,.14), transparent 27%),
+        linear-gradient(180deg,rgba(255,255,255,.02),transparent 40%);
+      pointer-events:none;
+    }
+    .hero-grid{
+      position:absolute;inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size:72px 72px;
+      mask-image:linear-gradient(to right, transparent 0, rgba(0,0,0,.85) 48%, #000 100%);
+      opacity:.42;
+    }
+    .hero-inner{
+      position:relative;z-index:2;
+      display:grid;grid-template-columns:1.03fr .97fr;
+      gap:40px;align-items:center;
+      padding-top:100px;
+    }
+    .hero-copy{max-width:740px}
+    .hero .eyebrow{color:#9fb0bc}
+    .hero h1{
+      margin-top:24px;
+      font-size:clamp(52px,7vw,94px);
+      max-width:780px;
+    }
+    .hero h1 span{color:#97dce4}
+    .hero-sub{
+      margin-top:28px;
+      max-width:640px;
+      color:#c3d0d8;
+      font-size:18px;
+      line-height:1.7;
+    }
+    .actions{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;gap:12px;
+      min-height:48px;padding:0 18px;
+      text-decoration:none;font-size:14px;font-weight:700;
+      border:1px solid rgba(255,255,255,.28);
+      transition:.25s ease;
+    }
+    .btn-primary{background:#fff;color:var(--ink);border-color:#fff}
+    .btn-primary:hover{background:var(--cyan-soft);border-color:var(--cyan-soft)}
+    .btn-secondary{color:#fff}
+    .btn-secondary:hover{border-color:var(--cyan);color:#9fe6ec}
+    .hero-visual{position:relative;min-height:520px}
+    .hero-visual .panel{
+      position:absolute;right:0;top:6%;width:min(100%,520px);height:470px;
+      border:1px solid rgba(255,255,255,.13);
+      background:linear-gradient(145deg,rgba(255,255,255,.035),rgba(25,183,201,.025));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.04);
+      overflow:hidden;
+    }
+    .hero-visual .panel::before{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size:52px 52px;
+    }
+    .coord{
+      position:absolute;color:#8fa8b7;font:400 10px/1 "DM Mono",monospace;letter-spacing:.05em;
+      opacity:.9;
+    }
+    .c1{left:16px;top:14px}.c2{right:16px;bottom:14px}
+    .network{position:absolute;inset:54px 34px 40px}
+    .network svg{width:100%;height:100%;overflow:visible}
+    .network .route{
+      stroke:var(--cyan);stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round;
+      stroke-dasharray:4 8;opacity:.9;animation:dash 18s linear infinite;
+    }
+    .network .contour{stroke:rgba(150,223,229,.24);stroke-width:1;fill:none}
+    .network .point{fill:#fff;stroke:var(--cyan);stroke-width:1.5}
+    .network .pulse{fill:rgba(25,183,201,.18);stroke:var(--cyan);stroke-width:1;animation:pulse 3s infinite}
+    .hero-meta{
+      position:absolute;left:0;bottom:16px;
+      display:flex;gap:26px;align-items:center;
+      color:#9fb0bc;font:400 11px/1 "DM Mono",monospace;
+    }
+    .hero-meta strong{color:#fff}
+    @keyframes dash{to{stroke-dashoffset:-220}}
+    @keyframes pulse{0%,100%{r:7;opacity:.55}50%{r:15;opacity:.15}}
+
+    /* STATS */
+    .proof{background:#fff;border-bottom:1px solid var(--line)}
+    .proof-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+    .stat{padding:34px 22px 34px 0;border-right:1px solid var(--line)}
+    .stat+ .stat{padding-left:24px}
+    .stat:last-child{border-right:0}
+    .stat .value{font:600 clamp(36px,4vw,58px)/1 "Space Grotesk",sans-serif;letter-spacing:-.055em}
+    .stat .label{margin-top:9px;font:500 11px/1 "DM Mono",monospace;color:var(--muted);letter-spacing:.07em;text-transform:uppercase}
+
+    /* STANDARD SECTIONS */
+    section.block{padding:120px 0}
+    .section-head{max-width:780px}
+    .section-head h2{font-size:clamp(44px,6vw,72px);margin-top:20px}
+    .body-copy{max-width:800px;margin-top:28px;display:grid;gap:18px;font-size:18px;line-height:1.8}
+
+    /* PROBLEM */
+    .problem .accent{
+      display:inline-block;margin-top:24px;
+      padding:8px 12px;background:var(--cyan-soft);color:#0d5963;
+      font:500 11px/1 "DM Mono",monospace;text-transform:uppercase;letter-spacing:.06em;
+    }
+
+    /* CAPABILITIES */
+    .cap-head{display:flex;justify-content:space-between;gap:24px;align-items:end}
+    .cap-head .section-head{max-width:740px}
+    .cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:58px}
+    .cap-card{
+      position:relative;min-height:480px;padding:26px;
+      background:#fff;border:1px solid var(--line);
+      display:flex;flex-direction:column;overflow:hidden;transition:.35s ease;
+    }
+    .cap-card::before{
+      content:"";position:absolute;inset:auto 0 0 0;height:2px;background:transparent;transition:.3s ease;
+    }
+    .cap-card:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:#c4d4dc}
+    .cap-card:hover::before{background:var(--cyan)}
+    .cap-card.featured{
+      background:linear-gradient(180deg,#effbfd,#fff 58%);
+      border-color:#a9dce3;
+    }
+    .card-kicker{font:500 11px/1 "DM Mono",monospace;color:var(--cyan);letter-spacing:.07em;text-transform:uppercase}
+    .cap-card h3{font-size:34px;margin-top:16px;max-width:330px}
+    .cap-card p{margin-top:18px;max-width:340px}
+    .cap-link{margin-top:auto;display:inline-flex;gap:10px;align-items:center;text-decoration:none;font-weight:700;font-size:14px}
+    .cap-link span{transition:.2s}.cap-link:hover span{transform:translateX(5px)}
+    .cap-art{
+      position:absolute;right:-20px;bottom:40px;width:68%;height:180px;opacity:.78;
+    }
+    .cap-art svg{width:100%;height:100%}
+    .cap-art path,.cap-art line,.cap-art polyline,.cap-art rect,.cap-art circle{
+      fill:none;stroke:#7cccd5;stroke-width:1;
+    }
+    .cap-art .solid{stroke:#19b7c9}
+    .cap-foot{margin-top:34px;display:flex;justify-content:center;color:var(--muted);font-size:14px}
+    .cap-foot a{text-decoration:underline;text-underline-offset:4px}
+
+    /* CASE STUDY */
+    .case{
+      background:#e8f5f7;
+      position:relative;overflow:hidden;
+    }
+    .case::after{
+      content:"DAXBOT";
+      position:absolute;right:-20px;top:18px;
+      font:700 clamp(90px,16vw,240px)/1 "Space Grotesk",sans-serif;
+      color:rgba(255,255,255,.58);
+      letter-spacing:-.06em;pointer-events:none;
+    }
+    .case-inner{position:relative;z-index:1}
+    .case-top{display:flex;justify-content:space-between;gap:36px;align-items:end}
+    .case-title{max-width:860px}
+    .case-title h2{font-size:clamp(48px,7vw,86px);margin-top:18px}
+    .case-title h2 span{color:#0e7380}
+    .case-link{
+      flex:0 0 auto;text-decoration:none;font-weight:700;
+      border-bottom:1px solid var(--ink);padding-bottom:7px;
+    }
+    .metrics{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;margin-top:52px}
+    .metric-large{
+      padding:30px;background:var(--ink);color:#fff;min-height:250px;
+      display:flex;flex-direction:column;justify-content:space-between;
+    }
+    .metric-large .number{font:600 clamp(64px,9vw,110px)/.9 "Space Grotesk",sans-serif;letter-spacing:-.06em}
+    .metric-large .label{font:500 11px/1 "DM Mono",monospace;color:#9fb0bc;letter-spacing:.08em}
+    .metric-side{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .small-metric{
+      background:#fff;border:1px solid rgba(7,24,39,.09);padding:26px;
+      min-height:117px;display:flex;flex-direction:column;justify-content:space-between;
+    }
+    .small-metric .n{font:600 42px/1 "Space Grotesk",sans-serif}
+    .small-metric .l{font:500 10px/1.2 "DM Mono",monospace;color:var(--muted);letter-spacing:.08em}
+    .case-content{display:grid;grid-template-columns:.8fr 1.2fr;gap:58px;margin-top:60px}
+    .case-content .story{font-size:17px;line-height:1.8}
+    .proof-list{display:grid;gap:13px}
+    .proof-row{
+      display:grid;grid-template-columns:24px 1fr;gap:13px;
+      padding:16px 0;border-top:1px solid rgba(7,24,39,.12);
+    }
+    .proof-row:last-child{border-bottom:1px solid rgba(7,24,39,.12)}
+    .proof-row .arrow{font-family:"DM Mono",monospace;color:#0e7380}
+    .proof-row strong{font-family:"Space Grotesk",sans-serif;font-size:16px}
+
+    /* BEFORE AFTER */
+    .compare{background:#fff}
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:54px}
+    .compare-card{padding:32px;border:1px solid var(--line);min-height:520px}
+    .compare-card.dark{background:var(--ink);color:#fff;border-color:var(--ink)}
+    .compare-card .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+    .compare-card .tag{font:500 11px/1 "DM Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+    .compare-card.dark .tag{color:#9fb0bc}
+    .compare-item{
+      padding:21px 0;border-top:1px solid var(--line);font-family:"Space Grotesk",sans-serif;font-size:18px;
+    }
+    .compare-card.dark .compare-item{border-color:rgba(255,255,255,.13)}
+    .compare-item span{display:block;margin-top:7px;color:var(--muted);font:400 13px/1.5 Inter,sans-serif}
+    .compare-card.dark .compare-item span{color:#9fb0bc}
+
+    /* HOW */
+    .steps-wrap{margin-top:52px;border-top:1px solid var(--line)}
+    .step{
+      display:grid;grid-template-columns:110px 180px 1fr;gap:20px;
+      padding:25px 0;border-bottom:1px solid var(--line);align-items:start;
+    }
+    .step .num{font:500 14px/1 "DM Mono",monospace;color:var(--cyan)}
+    .step h3{font-size:25px}
+    .step p{max-width:720px}
+
+    /* WHY */
+    .why-head{display:flex;justify-content:space-between;align-items:end;gap:40px}
+    .why-intro{max-width:740px;margin-top:26px;font-size:18px;line-height:1.8}
+    .why-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:56px}
+    .why-card{
+      min-height:250px;padding:25px 22px 28px 0;border-right:1px solid var(--line);border-bottom:1px solid var(--line);
+    }
+    .why-card:nth-child(3n+2),.why-card:nth-child(3n+3){padding-left:22px}
+    .why-card:nth-child(3n){border-right:0}
+    .why-index{font:500 11px/1 "DM Mono",monospace;color:var(--cyan)}
+    .why-card h3{font-size:25px;margin-top:18px}
+    .why-card p{margin-top:12px;font-size:14px;line-height:1.7}
+
+    /* FAQ */
+    .faq{background:var(--mist)}
+    .faq-grid{margin-top:54px;border-top:1px solid var(--line)}
+    .faq-item{border-bottom:1px solid var(--line)}
+    .faq-button{
+      width:100%;border:0;background:none;padding:26px 0;text-align:left;
+      display:grid;grid-template-columns:50px 1fr 24px;gap:20px;align-items:center;
+      cursor:pointer;color:var(--ink);
+    }
+    .faq-button .qnum{font:500 11px/1 "DM Mono",monospace;color:var(--cyan)}
+    .faq-button strong{font:600 24px/1.25 "Space Grotesk",sans-serif}
+    .faq-icon{font:300 30px/1 "Space Grotesk",sans-serif;transition:.25s}
+    .faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease}
+    .faq-answer p{max-width:900px;padding:0 74px 28px;font-size:16px;line-height:1.8}
+    .faq-item.open .faq-answer{max-height:240px}
+    .faq-item.open .faq-icon{transform:rotate(45deg)}
+
+    /* CTA */
+    .final-cta{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+    .final-cta::before{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size:72px 72px;
+      mask-image:linear-gradient(to right,transparent,#000 30%,#000 70%,transparent);
+      opacity:.55;
+    }
+    .cta-inner{position:relative;z-index:1;text-align:center;max-width:860px;margin-inline:auto}
+    .cta-inner .eyebrow{justify-content:center;color:#9fb0bc}
+    .cta-inner h2{font-size:clamp(52px,8vw,92px);margin-top:20px}
+    .cta-inner p{max-width:640px;margin:24px auto 0;color:#bdcad2;font-size:18px}
+    .cta-inner .actions{justify-content:center}
+
+    footer{background:#06131e;color:#8ea0ad;padding:24px 0;border-top:1px solid rgba(255,255,255,.08)}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}
+    .footer-inner p{font:400 11px/1.5 "DM Mono",monospace;color:#718592}
+    .footer-links{display:flex;gap:20px}
+    .footer-links a{font-size:12px;text-decoration:none;color:#a1b2bd}
+
+    /* RESPONSIVE */
+    @media (max-width: 1050px){
+      .hero-inner{grid-template-columns:1fr}
+      .hero-visual{min-height:440px;margin-top:-10px}
+      .hero-copy{max-width:820px}
+      .cap-grid{grid-template-columns:1fr 1fr}
+      .cap-card:last-child{grid-column:1/-1}
+      .why-grid{grid-template-columns:1fr 1fr}
+      .why-card:nth-child(3n){border-right:1px solid var(--line)}
+      .why-card:nth-child(2n){border-right:0}
+      .why-card:nth-child(3n+2),.why-card:nth-child(3n+3){padding-left:22px}
+      .why-card:nth-child(2n+1){padding-left:0}
+    }
+
+    @media (max-width: 820px){
+      .container{width:min(calc(100% - 28px),var(--max))}
+      .nav-links,.nav-cta{display:none}
+      .nav-toggle{display:block}
+      .hero{min-height:auto;padding-bottom:80px}
+      .hero-inner{padding-top:140px}
+      .hero-visual{min-height:360px}
+      .hero-visual .panel{height:330px}
+      .proof-grid{grid-template-columns:1fr 1fr}
+      .stat{border-bottom:1px solid var(--line)}
+      .stat:nth-child(2){border-right:0}
+      .stat:nth-child(3){padding-left:0}
+      section.block{padding:84px 0}
+      .cap-grid,.compare-grid,.case-content,.metrics{grid-template-columns:1fr}
+      .cap-card:last-child{grid-column:auto}
+      .metric-side{grid-template-columns:1fr 1fr}
+      .step{grid-template-columns:50px 1fr}
+      .step p{grid-column:2}
+      .why-grid{grid-template-columns:1fr}
+      .why-card,.why-card:nth-child(3n),.why-card:nth-child(2n){border-right:0;padding-left:0!important}
+      .faq-button{grid-template-columns:34px 1fr 24px}
+      .faq-answer p{padding-left:54px}
+    }
+
+    @media (max-width: 560px){
+      .hero h1{font-size:48px}
+      .hero-sub{font-size:16px}
+      .hero-visual{min-height:300px}
+      .hero-visual .panel{height:280px}
+      .hero-meta{gap:13px;flex-wrap:wrap}
+      .proof-grid{grid-template-columns:1fr}
+      .stat,.stat+ .stat{padding:23px 0;border-right:0}
+      .cap-card{min-height:410px}
+      .case-title h2,.section-head h2,.cta-inner h2{font-size:46px}
+      .case::after{font-size:90px}
+      .metric-side{grid-template-columns:1fr}
+      .compare-card{min-height:auto}
+      .step{grid-template-columns:44px 1fr}
+      .step p{grid-column:2}
+      .faq-button strong{font-size:19px}
+      .faq-answer p{padding-left:44px}
+      .footer-inner{align-items:flex-start;flex-direction:column}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-nav" id="siteNav">
+    <div class="container nav-inner">
+      <a href="/" class="brand" aria-label="Delta Precision Group home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>DELTA PRECISION GROUP</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#capabilities">Capabilities</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#case-study">Case Study</a>
+        <a href="#why-delta">Why Delta</a>
+        <a href="#faq">Questions</a>
+      </nav>
+
+      <a class="nav-cta" href="/contact/">Talk to Delta <span aria-hidden="true">→</span></a>
+      <button class="nav-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">MENU</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <div class="eyebrow">Engineering / Geospatial / Production</div>
+          <h1 id="hero-heading">Engineering and geospatial <span>production support</span> for U.S. technical firms.</h1>
+          <p class="hero-sub">
+            Delta manages the production operation day to day, while your team stays connected through a dedicated point of contact for requirements, priorities, feedback, and review.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="/case-studies/">See Our Work <span aria-hidden="true">→</span></a>
+            <a class="btn btn-secondary" href="/contact/">Talk to Us <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="panel">
+            <span class="coord c1">30.2241° N / 92.0198° W</span>
+            <span class="coord c2">DPG / SYSTEM 001 / ACTIVE</span>
+            <div class="network">
+              <svg viewBox="0 0 600 470" role="presentation">
+                <path class="contour" d="M18 114 C95 56, 180 48, 260 104 S442 198, 581 126" />
+                <path class="contour" d="M-12 172 C75 120, 158 118, 258 164 S446 255, 610 201" />
+                <path class="contour" d="M-10 246 C94 184, 188 198, 282 232 S460 318, 612 272" />
+                <path class="contour" d="M-15 336 C90 286, 198 318, 290 350 S472 414, 615 346" />
+                <path class="route" d="M34 382 L148 300 L200 326 L298 210 L380 248 L478 138 L568 174" />
+                <path class="route" d="M82 102 L190 168 L296 110 L392 178 L502 84" style="stroke-dasharray:2 10;opacity:.6" />
+                <circle class="pulse" cx="148" cy="300" r="8"></circle>
+                <circle class="pulse" cx="298" cy="210" r="8"></circle>
+                <circle class="pulse" cx="478" cy="138" r="8"></circle>
+                <circle class="point" cx="34" cy="382" r="6"></circle>
+                <circle class="point" cx="568" cy="174" r="6"></circle>
+                <circle class="point" cx="82" cy="102" r="5"></circle>
+                <circle class="point" cx="502" cy="84" r="5"></circle>
+              </svg>
+            </div>
+          </div>
+          <div class="hero-meta">
+            <span><strong>46,677+</strong> FILES</span>
+            <span><strong>97%</strong> ON-TIME</span>
+            <span><strong>3 → 26</strong> TEAM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof" aria-labelledby="proof-heading">
+      <div class="container proof-grid">
+        <h2 id="proof-heading" style="position:absolute;left:-9999px;">Delta production performance</h2>
+        <div class="stat"><div class="value">46,677+</div><div class="label">Files completed</div></div>
+        <div class="stat"><div class="value">97%</div><div class="label">On-time delivery</div></div>
+        <div class="stat"><div class="value">9+ months</div><div class="label">Ongoing engagement</div></div>
+        <div class="stat"><div class="value">3 → 26</div><div class="label">Team members built</div></div>
+      </div>
+    </section>
+
+    <section class="block problem" aria-labelledby="problem-heading">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">02 / The Capacity Gap</div>
+          <h2 id="problem-heading">Your production backlog is not a staffing problem. <span style="color:#0e7380;">It's a capacity problem.</span></h2>
+        </div>
+        <div class="body-copy">
+          <p>Technical teams get stretched. Deadlines stay fixed. Senior engineers and technical staff can end up spending time on production work that a dedicated technical team could handle — because there's nobody else to do it.</p>
+          <p>Hiring solves it eventually. But hiring takes months, costs more than the work justifies, and leaves you with fixed headcount when the project is done. Most firms either carry the cost or keep the backlog.</p>
+          <p>Delta is the third option. A managed production team that learns your standards, handles the defined workflow, and takes the day-to-day production management off your team. You stay connected on priorities, requirements, and feedback. We manage the people, production, QA, and performance.</p>
+          <p>Delta removes the burden of building and operating the production workforce, so you can focus your time and resources on what moves your business forward.</p>
+        </div>
+        <span class="accent">Capacity without the hiring cycle</span>
+      </div>
+    </section>
+
+    <section class="block" id="capabilities" aria-labelledby="capabilities-heading">
+      <div class="container">
+        <div class="cap-head">
+          <div class="section-head">
+            <div class="eyebrow">03 / What Delta Delivers</div>
+            <h2 id="capabilities-heading">Three capability pillars. One operating model underneath all three.</h2>
+          </div>
+        </div>
+
+        <div class="cap-grid">
+          <article class="cap-card featured">
+            <div class="card-kicker">Strongest demonstrated capability</div>
+            <h3>GIS &amp; Data Science</h3>
+            <p>Geospatial data production, image annotation, LiDAR processing, spatial analysis, GIS workflow automation and data mapping.</p>
+            <div class="cap-art" aria-hidden="true">
+              <svg viewBox="0 0 300 180">
+                <path d="M10 125 C45 75, 95 62, 150 105 S240 145, 300 64"/>
+                <path d="M0 144 C55 102, 104 97, 156 131 S240 173, 305 98"/>
+                <path d="M20 52 C76 24, 128 48, 169 67 S246 76, 296 29"/>
+                <path class="solid" d="M22 145 L96 99 L148 118 L214 52 L282 76"/>
+                <circle class="solid" cx="96" cy="99" r="5"/><circle class="solid" cx="214" cy="52" r="5"/>
+              </svg>
+            </div>
+            <a class="cap-link" href="/gis-data-science/">View GIS &amp; Data Science <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="cap-card">
+            <div class="card-kicker">Technical production capability</div>
+            <h3>Civil &amp; Public Works Engineering</h3>
+            <p>ADA/PROWAG compliance, transportation engineering, municipal infrastructure, DOT-standard drafting, CAD documentation and regulatory mapping.</p>
+            <div class="cap-art" aria-hidden="true">
+              <svg viewBox="0 0 300 180">
+                <polyline points="5,128 65,100 112,120 152,78 205,91 298,41"/>
+                <polyline points="8,152 78,128 125,145 168,105 216,116 300,72"/>
+                <line x1="42" y1="46" x2="260" y2="132"/><line x1="40" y1="100" x2="264" y2="31"/>
+                <rect class="solid" x="112" y="64" width="38" height="24"/><circle class="solid" cx="205" cy="91" r="5"/>
+              </svg>
+            </div>
+            <a class="cap-link" href="/civil-engineering-services/">View Civil &amp; Public Works <span aria-hidden="true">→</span></a>
+          </article>
+
+          <article class="cap-card">
+            <div class="card-kicker">Technical production capability</div>
+            <h3>Mechanical &amp; Marine Engineering</h3>
+            <p>3D modeling, structural analysis, marine and offshore engineering design, FEA/CFD analysis, PEB buildings and reverse engineering.</p>
+            <div class="cap-art" aria-hidden="true">
+              <svg viewBox="0 0 300 180">
+                <circle cx="140" cy="82" r="51"/><circle cx="140" cy="82" r="25"/>
+                <line x1="46" y1="82" x2="92" y2="82"/><line x1="188" y1="82" x2="244" y2="82"/>
+                <line x1="140" y1="0" x2="140" y2="31"/><line x1="140" y1="133" x2="140" y2="173"/>
+                <polyline class="solid" points="238,35 279,67 258,112 222,124 198,158 165,143"/>
+                <circle class="solid" cx="140" cy="82" r="5"/>
+              </svg>
+            </div>
+            <a class="cap-link" href="/mechanical-marine-services/">View Mechanical &amp; Marine <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+        <div class="cap-foot">Not sure which capability fits your work? <a href="/contact/">Tell us what you need to produce and we'll tell you if Delta is the right fit.</a></div>
+      </div>
+    </section>
+
+    <section class="block case" id="case-study" aria-labelledby="case-heading">
+      <div class="container case-inner">
+        <div class="case-top">
+          <div class="case-title">
+            <div class="eyebrow">04 / Daxbot Proof</div>
+            <h2 id="case-heading">15 Months. 46,677 Files. <span>97% On-Time Delivery.</span></h2>
+          </div>
+          <a class="case-link" href="/case-studies/daxbot/">Read the full case study →</a>
+        </div>
+
+        <div class="metrics">
+          <div class="metric-large">
+            <div class="number">67%</div>
+            <div class="label">Reduced turnaround time</div>
+          </div>
+          <div class="metric-side">
+            <div class="small-metric"><div class="n">750%</div><div class="l">Throughput increase</div></div>
+            <div class="small-metric"><div class="n">10</div><div class="l">Municipalities covered</div></div>
+            <div class="small-metric"><div class="n">26</div><div class="l">Team members built</div></div>
+            <div class="small-metric"><div class="n">14%</div><div class="l">QA pass-rate improvement</div></div>
+          </div>
+        </div>
+
+        <div class="case-content">
+          <div class="story">
+            <p>Daxbot builds autonomous robots that capture ADA and PROWAG compliance data from U.S. sidewalks, crosswalks, and curb ramps. Their robots collect the imagery. Someone still has to turn that imagery into a usable compliance inventory.</p>
+            <br />
+            <p>That's the work Delta took on in May 2025, starting with one city in Texas. Nine months later, the engagement covers ten municipalities and a team of 26.</p>
+            <br />
+            <p>Delta didn't just provide annotators. We built the production operation around the workflow — and rebuilt it as the work grew.</p>
+          </div>
+          <div class="proof-list">
+            <div class="proof-row"><div class="arrow">→</div><div><strong>Specialized QA by asset type</strong><p>Dedicated reviewers for sidewalks, crosswalks, and curb ramps, not a single generalist pass.</p></div></div>
+            <div class="proof-row"><div class="arrow">→</div><div><strong>Performance dashboard</strong><p>Built internally to track completion rates, accuracy, and turnaround at the individual level.</p></div></div>
+            <div class="proof-row"><div class="arrow">→</div><div><strong>Documentation infrastructure</strong><p>Written guides, video tutorials, and an edge-case library so new team members train against a standard.</p></div></div>
+            <div class="proof-row"><div class="arrow">→</div><div><strong>Surge absorption</strong><p>Last-minute municipal contracts delivered without missed deadlines.</p></div></div>
+            <div class="proof-row"><div class="arrow">→</div><div><strong>Continuous improvement</strong><p>QA pass rate rose 14% over nine months; rework dropped from 20% to 10%.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block compare" aria-labelledby="compare-heading">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">05 / What Changes</div>
+          <h2 id="compare-heading">What changes when Delta is on the team.</h2>
+        </div>
+
+        <div class="compare-grid">
+          <article class="compare-card">
+            <div class="head"><strong>WITHOUT MANAGED CAPACITY</strong><span class="tag">Internal burden</span></div>
+            <div class="compare-item">Senior staff absorbed into production work<span>Expert time gets pulled away from higher-value technical work.</span></div>
+            <div class="compare-item">New capacity means recruitment and management<span>Hiring creates a second operational problem.</span></div>
+            <div class="compare-item">Workload spikes create bottlenecks<span>Fixed headcount cannot flex with the workload.</span></div>
+            <div class="compare-item">Client team carries the QA burden<span>Review and rework stay inside your operation.</span></div>
+            <div class="compare-item">Outsourcing becomes a second job to manage<span>Someone on your side still has to run the vendor.</span></div>
+          </article>
+
+          <article class="compare-card dark">
+            <div class="head"><strong>WITH DELTA PRECISION GROUP</strong><span class="tag">Managed operation</span></div>
+            <div class="compare-item">A managed team handles the defined workflow<span>Delta learns the standards and owns the production process.</span></div>
+            <div class="compare-item">Delta recruits, trains and manages the team<span>You get capacity without building the workforce.</span></div>
+            <div class="compare-item">Production capacity scales with workload<span>The team expands when demand grows.</span></div>
+            <div class="compare-item">Internal QA completed before delivery<span>Work is checked before it reaches your team.</span></div>
+            <div class="compare-item">Delta manages production end to end<span>You set the standard and review the output.</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="how-it-works" aria-labelledby="how-heading">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">06 / The Operating Model</div>
+          <h2 id="how-heading">How it works.</h2>
+          <div class="body-copy" style="margin-top:22px">
+            <p>Our core values of integrity, excellence, and tenacity are built into everything we do for our partners, right down to the operating model Delta uses to build and manage your technical production workflows.</p>
+          </div>
+        </div>
+
+        <div class="steps-wrap">
+          <article class="step"><div class="num">01</div><h3>Understand</h3><p>We learn your workflow, standards, quality benchmarks, and what a good deliverable looks like before a single file is opened.</p></article>
+          <article class="step"><div class="num">02</div><h3>Build the team</h3><p>We assemble the right people for the specific work, matched to the technical domain, not pulled from a generic pool.</p></article>
+          <article class="step"><div class="num">03</div><h3>Train and calibrate</h3><p>Every team member trains against documented standards and works supervised production before handling live files.</p></article>
+          <article class="step"><div class="num">04</div><h3>Produce</h3><p>Work is distributed, tracked against productivity benchmarks, and managed internally, not handed back to you to supervise.</p></article>
+          <article class="step"><div class="num">05</div><h3>Internal QA</h3><p>Dedicated QA reviewers check every file before it leaves Delta. Internal QA is completed before delivery.</p></article>
+          <article class="step"><div class="num">06</div><h3>Client review and feedback</h3><p>Feedback from your team is fed back into workflow documentation and training, not absorbed and forgotten.</p></article>
+          <article class="step"><div class="num">07</div><h3>Measure and improve</h3><p>Performance, accuracy, and turnaround are tracked at the individual level.</p></article>
+          <article class="step"><div class="num">08</div><h3>Scale</h3><p>When your workload grows, the team grows with it. When it contracts, so does the team.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="why-delta" aria-labelledby="why-heading">
+      <div class="container">
+        <div class="why-head">
+          <div class="section-head">
+            <div class="eyebrow">07 / Why Delta</div>
+            <h2 id="why-heading">Not a vendor. A managed production operation.</h2>
+          </div>
+        </div>
+        <p class="why-intro">Delta doesn't just provide people. We manage the production system around the work: training, QA, documentation, performance tracking, and scaling.</p>
+
+        <div class="why-grid">
+          <article class="why-card"><div class="why-index">01</div><h3>Training infrastructure</h3><p>Every team member trains against documented standards before touching live work. A structured ramp-up with supervised production.</p></article>
+          <article class="why-card"><div class="why-index">02</div><h3>Dedicated QA</h3><p>QA is built into the operation, not bolted on. Reviewers check work by asset type before anything is submitted.</p></article>
+          <article class="why-card"><div class="why-index">03</div><h3>Knowledge management</h3><p>Edge cases, requirement changes and workflow decisions are documented so new people train against a written standard.</p></article>
+          <article class="why-card"><div class="why-index">04</div><h3>Performance tracking</h3><p>An internal dashboard tracks completion rates, QA pass rates, turnaround, and remediation at the individual level.</p></article>
+          <article class="why-card"><div class="why-index">05</div><h3>Client feedback loop</h3><p>Your feedback changes the workflow. Requirement updates are documented, retrained, and tracked.</p></article>
+          <article class="why-card"><div class="why-index">06</div><h3>Scalability</h3><p>The team expands when your workload grows and contracts when it doesn't. No hiring cycle, no idle bench time.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block faq" id="faq" aria-labelledby="faq-heading">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">08 / Common Questions</div>
+          <h2 id="faq-heading">The questions we get asked before every conversation.</h2>
+        </div>
+
+        <div class="faq-grid">
+          <article class="faq-item open">
+            <button class="faq-button" type="button" aria-expanded="true">
+              <span class="qnum">01</span>
+              <strong>Our needs are highly specialized. Can your team deliver on our unique requirements?</strong>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer"><p>This is where Delta stands out. Our superpower is building teams fit for purpose. Working hand in hand with our partners, we tailor teams around your requirements and specifications.</p></div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-button" type="button" aria-expanded="false">
+              <span class="qnum">02</span>
+              <strong>Will I end up managing the vendor?</strong>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer"><p>Delta manages the production operation. You set the standard and review the output. The team, the QA, the training, and the performance tracking stay with us.</p></div>
+          </article>
+
+          <article class="faq-item">
+            <button class="faq-button" type="button" aria-expanded="false">
+              <span class="qnum">03</span>
+              <strong>How quickly can a team be operational?</strong>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer"><p>Every engagement begins with workflow discovery, team selection, training, and calibration. The ramp is designed around the technical requirements and quality threshold of the work, rather than forcing a generic onboarding process.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block final-cta" aria-labelledby="final-heading">
+      <div class="container cta-inner">
+        <div class="eyebrow">09 / Ready to Scale?</div>
+        <h2 id="final-heading">Need more technical production capacity?</h2>
+        <p>Tell us what you need to produce. We'll scope the right team and delivery model.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="/contact/">Talk to Delta <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p>© 2026 Delta Precision Group. Engineering &amp; geospatial production support.</p>
+      <div class="footer-links">
+        <a href="/case-studies/">Case Studies</a>
+        <a href="/contact/">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('siteNav');
+
+    const syncNav = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 30);
+    };
+    syncNav();
+    window.addEventListener('scroll', syncNav, { passive: true });
+
+    document.querySelectorAll('.faq-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+
+        document.querySelectorAll('.faq-item').forEach((other) => {
+          other.classList.remove('open');
+          other.querySelector('.faq-button').setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isOpen) {
+          item.classList.add('open');
+          button.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+
+    toggle?.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!open));
+      toggle.textContent = open ? 'MENU' : 'CLOSE';
+      links.style.display = open ? '' : 'flex';
+      links.style.position = 'fixed';
+      links.style.top = '78px';
+      links.style.left = '14px';
+      links.style.right = '14px';
+      links.style.padding = '18px';
+      links.style.background = 'rgba(247,249,250,.98)';
+      links.style.color = 'var(--ink)';
+      links.style.flexDirection = 'column';
+      links.style.alignItems = 'flex-start';
+      links.style.border = '1px solid var(--line)';
+    });
+  </script>
+</body>
+</html>
