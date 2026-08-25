@@ -1451,3 +1451,240 @@ ol {
     border-top: 1px solid var(--dpg-border-subtle);
   }
 }
+/* ============================================================
+   S4 — CAPABILITIES (light theme)  ·  START
+   ============================================================ */
+
+.dpg-capabilities {
+  background: var(--dpg-neutral-50);
+  padding-block: clamp(var(--dpg-space-20), 10vw, var(--dpg-space-32));
+  border-top: 1px solid var(--dpg-border-light);
+}
+
+/* Section header overrides for light bg */
+.dpg-capabilities .dpg-section-title {
+  color: var(--dpg-text-on-light);
+}
+
+.dpg-capabilities .dpg-section-sub {
+  color: var(--dpg-neutral-600);
+  font-size: var(--dpg-text-lg);
+}
+
+/* 3-column card grid */
+.dpg-cap__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--dpg-space-6);
+  margin-top: var(--dpg-space-12);
+}
+
+/* Base card */
+.dpg-cap__card {
+  background: var(--dpg-neutral-0);
+  border: 1px solid var(--dpg-border-light);
+  border-radius: var(--dpg-radius-xl);
+  padding: var(--dpg-space-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--dpg-space-5);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--dpg-shadow-sm);
+  /* Override shared scroll-reveal opacity:0 � CSS animation entrance instead */
+  opacity: 1;
+  transform: none;
+  animation: dpg-cap-in var(--dpg-duration-slower) var(--dpg-ease-out) both;
+  /* Hover only */
+  transition:
+    transform    var(--dpg-duration-base) var(--dpg-ease-out),
+    box-shadow   var(--dpg-duration-base) var(--dpg-ease-out),
+    border-color var(--dpg-duration-base) var(--dpg-ease-out);
+}
+
+.dpg-cap__card:nth-child(1) { animation-delay:   0ms; }
+.dpg-cap__card:nth-child(2) { animation-delay: 120ms; }
+.dpg-cap__card:nth-child(3) { animation-delay: 240ms; }
+
+@keyframes dpg-cap-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.dpg-cap__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--dpg-shadow-md);
+  border-color: var(--dpg-border-accent);
+}
+
+/* Featured card — GIS */
+.dpg-cap__card--featured {
+  border-color: hsla(195, 100%, 46%, 0.3);
+  box-shadow:
+    var(--dpg-shadow-sm),
+    0 0 0 1px hsla(195, 100%, 46%, 0.1) inset;
+}
+
+/* Cyan left accent bar */
+.dpg-cap__card--featured::before {
+  content: '';
+  position: absolute;
+  top: var(--dpg-space-8);
+  bottom: var(--dpg-space-8);
+  left: 0;
+  width: 3px;
+  background: var(--dpg-brand-accent);
+  border-radius: 0 var(--dpg-radius-sm) var(--dpg-radius-sm) 0;
+}
+
+.dpg-cap__card--featured:hover {
+  box-shadow: var(--dpg-shadow-md), var(--dpg-shadow-accent);
+}
+
+/* Badge */
+.dpg-cap__card-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--dpg-font-mono);
+  font-size: var(--dpg-text-xs);
+  letter-spacing: var(--dpg-tracking-wider);
+  text-transform: uppercase;
+  color: var(--dpg-brand-accent);
+  background: hsla(195, 100%, 46%, 0.08);
+  border: 1px solid hsla(195, 100%, 46%, 0.18);
+  border-radius: var(--dpg-radius-full);
+  padding: 3px var(--dpg-space-3);
+  width: fit-content;
+}
+
+.dpg-cap__card-badge--secondary {
+  color: var(--dpg-neutral-600);
+  background: var(--dpg-neutral-100);
+  border-color: var(--dpg-border-light);
+}
+
+/* Icon */
+.dpg-cap__icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: hsla(195, 100%, 46%, 0.07);
+  border: 1px solid hsla(195, 100%, 46%, 0.15);
+  border-radius: var(--dpg-radius-lg);
+  color: var(--dpg-brand-accent);
+  flex-shrink: 0;
+  transition: background var(--dpg-duration-base) var(--dpg-ease-out),
+              border-color var(--dpg-duration-base) var(--dpg-ease-out),
+              color var(--dpg-duration-base) var(--dpg-ease-out);
+}
+
+.dpg-cap__card:hover .dpg-cap__icon {
+  background: hsla(195, 100%, 46%, 0.12);
+}
+
+.dpg-cap__card:not(.dpg-cap__card--featured) .dpg-cap__icon {
+  background: var(--dpg-neutral-100);
+  border-color: var(--dpg-border-light);
+  color: var(--dpg-neutral-600);
+}
+
+.dpg-cap__card:not(.dpg-cap__card--featured):hover .dpg-cap__icon {
+  background: hsla(195, 100%, 46%, 0.07);
+  border-color: hsla(195, 100%, 46%, 0.2);
+  color: var(--dpg-brand-accent);
+}
+
+/* Title */
+.dpg-cap__title {
+  font-family: var(--dpg-font-display);
+  font-size: var(--dpg-text-xl);
+  font-weight: var(--dpg-weight-semibold);
+  letter-spacing: var(--dpg-tracking-snug);
+  line-height: var(--dpg-leading-snug);
+  color: var(--dpg-text-on-light);
+}
+
+/* Description */
+.dpg-cap__desc {
+  font-family: var(--dpg-font-body);
+  font-size: var(--dpg-text-sm);
+  line-height: var(--dpg-leading-normal);
+  color: var(--dpg-neutral-600);
+  flex: 1;
+}
+
+/* CTA link */
+.dpg-cap__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--dpg-space-2);
+  font-family: var(--dpg-font-display);
+  font-size: var(--dpg-text-sm);
+  font-weight: var(--dpg-weight-semibold);
+  letter-spacing: var(--dpg-tracking-wide);
+  color: var(--dpg-brand-accent);
+  margin-top: auto;
+  transition: color var(--dpg-duration-fast) var(--dpg-ease-out);
+}
+
+.dpg-cap__link span {
+  display: inline-block;
+  transition: transform var(--dpg-duration-base) var(--dpg-ease-out);
+}
+
+.dpg-cap__link:hover { color: var(--dpg-brand-delta); }
+.dpg-cap__link:hover span { transform: translateX(5px); }
+
+/* Footer note */
+.dpg-cap__footer-note {
+  font-family: var(--dpg-font-body);
+  font-size: var(--dpg-text-sm);
+  color: var(--dpg-neutral-600);
+  text-align: center;
+  margin-top: var(--dpg-space-12);
+  line-height: var(--dpg-leading-normal);
+}
+
+.dpg-cap__footer-note a {
+  color: var(--dpg-brand-accent);
+  font-weight: var(--dpg-weight-medium);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: hsla(195, 100%, 46%, 0.3);
+  transition: color var(--dpg-duration-fast) var(--dpg-ease-out),
+              text-decoration-color var(--dpg-duration-fast) var(--dpg-ease-out);
+}
+
+.dpg-cap__footer-note a:hover {
+  color: var(--dpg-brand-delta);
+  text-decoration-color: var(--dpg-brand-delta);
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .dpg-cap__grid {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+    margin-inline: auto;
+  }
+
+  .dpg-cap__card--featured::before {
+    top: 0;
+    left: var(--dpg-space-8);
+    right: var(--dpg-space-8);
+    bottom: auto;
+    width: auto;
+    height: 3px;
+    border-radius: 0 0 var(--dpg-radius-sm) var(--dpg-radius-sm);
+  }
+}
+
+@media (max-width: 600px) {
+  .dpg-cap__card { padding: var(--dpg-space-8); }
+}
+
+/* ============================================================
+   S4 — CAPABILITIES  ·  END
+   ============================================================ */
