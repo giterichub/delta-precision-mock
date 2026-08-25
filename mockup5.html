@@ -21,6 +21,11 @@
   --cyan: #3dd6c6;
   --cyan-deep: #1aa89a;
   --brass: #c9ae7a;
+  --paper: #f4f7f5;
+  --paper-2: #e8eeeb;
+  --ink-dark: #10202c;
+  --ink-mid: #4a5d6c;
+  --line-light: rgba(16, 32, 44, 0.1);
   --font-display: "Outfit", system-ui, sans-serif;
   --font-body: "IBM Plex Sans", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -40,7 +45,7 @@ body {
   margin: 0;
   min-height: 100vh;
   color: var(--ink);
-  background: var(--navy-950);
+  background: var(--paper);
   font-family: var(--font-body);
 }
 
@@ -472,6 +477,192 @@ h1 span {
   }
   100% {
     box-shadow: 0 0 0 10px rgba(61, 214, 198, 0);
+  }
+}
+
+.section-kicker {
+  margin: 0 0 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--cyan-deep);
+}
+
+.kicker-dark {
+  color: var(--cyan-deep);
+}
+
+.proof {
+  background: #fff;
+  color: var(--ink-dark);
+  padding: 4.5rem 6vw 4.2rem;
+}
+
+.proof-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.proof-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--line-light);
+  border-bottom: 1px solid var(--line-light);
+}
+
+.proof-grid li {
+  padding: 2.4rem 1.5rem 2.2rem 0;
+  border-right: 1px solid var(--line-light);
+}
+
+.proof-grid li:last-child {
+  border-right: 0;
+  padding-right: 0;
+}
+
+.proof-grid li:first-child {
+  padding-left: 0;
+}
+
+.proof-value {
+  margin: 0 0 0.55rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  font-weight: 650;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--ink-dark);
+}
+
+.proof-value span {
+  color: var(--cyan-deep);
+}
+
+.proof-value .arrow-stat {
+  margin: 0 0.15em;
+  font-weight: 500;
+  color: var(--cyan-deep);
+}
+
+.proof-value small {
+  margin-left: 0.15em;
+  font-size: 0.38em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-mid);
+}
+
+.proof-label {
+  margin: 0;
+  max-width: 12rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--ink-mid);
+}
+
+.problem {
+  position: relative;
+  background:
+    linear-gradient(180deg, var(--paper) 0%, #fbfcfb 100%);
+  color: var(--ink-dark);
+  padding: 5.5rem 6vw 6.5rem;
+  overflow: hidden;
+}
+
+.problem::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--line-light) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line-light) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 80% at 80% 20%, #000 10%, transparent 70%);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.problem-inner {
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.problem-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 5vw;
+  align-items: start;
+}
+
+.problem h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.4vw, 3.15rem);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+}
+
+.problem-copy {
+  max-width: 40rem;
+}
+
+.problem-copy p {
+  margin: 0 0 1.25rem;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--ink-mid);
+}
+
+.problem-copy p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  .proof-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .proof-grid li {
+    padding: 1.8rem 1.2rem 1.6rem 0;
+  }
+
+  .proof-grid li:nth-child(2) {
+    border-right: 0;
+    padding-right: 0;
+  }
+
+  .proof-grid li:nth-child(1),
+  .proof-grid li:nth-child(2) {
+    border-bottom: 1px solid var(--line-light);
+  }
+
+  .problem-layout {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .proof-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proof-grid li,
+  .proof-grid li:nth-child(2) {
+    border-right: 0;
+    padding: 1.6rem 0;
+    border-bottom: 1px solid var(--line-light);
+  }
+
+  .proof-grid li:last-child {
+    border-bottom: 0;
   }
 }
 
