@@ -280,7 +280,141 @@
         opacity: 1; animation: none;
       }
     }
-    
+    #proof-strip {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    /* faint grid echo from hero */
+    #proof-strip::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+ 
+    .proof-inner {
+      position: relative; z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+ 
+    .proof-item {
+      padding: 3.2rem 2.4rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      transition: background 0.2s;
+    }
+    .proof-item:last-child { border-right: none; }
+    .proof-item:hover { background: #F0F7FF; }
+ 
+    /* top accent bar animates in */
+    .proof-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--cyan);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .proof-item:hover::before,
+    .proof-item.visible::before {
+      transform: scaleX(1);
+    }
+ 
+    /* number */
+    .proof-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      line-height: 1;
+      color: var(--navy);
+      display: flex;
+      align-items: baseline;
+      gap: 0.1em;
+    }
+    .proof-num .suffix {
+      font-size: 0.5em;
+      color: var(--cyan);
+      font-weight: 800;
+    }
+    .proof-num .arrow {
+      font-size: 0.45em;
+      color: var(--cyan);
+      margin: 0 0.15em;
+      font-weight: 700;
+    }
+ 
+    /* label */
+    .proof-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--slate);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+ 
+    /* divider line between num and label */
+    .proof-divider {
+      width: 24px;
+      height: 1px;
+      background: var(--cyan);
+      opacity: 0.6;
+    }
+ 
+    /* count-up animation base state */
+    .proof-item {
+      opacity: 0;
+      transform: translateY(16px);
+      transition:
+        opacity 0.5s ease,
+        transform 0.5s ease,
+        background 0.2s;
+    }
+    .proof-item.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .proof-item:nth-child(1) { transition-delay: 0s;    }
+    .proof-item:nth-child(2) { transition-delay: 0.1s;  }
+    .proof-item:nth-child(3) { transition-delay: 0.2s;  }
+    .proof-item:nth-child(4) { transition-delay: 0.3s;  }
+ 
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .proof-inner {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .proof-item:nth-child(2) { border-right: none; }
+      .proof-item:nth-child(1),
+      .proof-item:nth-child(2) {
+        border-bottom: 1px solid var(--border);
+      }
+    }
+    @media (max-width: 480px) {
+      .proof-inner { grid-template-columns: 1fr; }
+      .proof-item  { border-right: none; border-bottom: 1px solid var(--border); }
+      .proof-item:last-child { border-bottom: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .proof-item { opacity: 1; transform: none; transition: none; }
+      .proof-item::before { transform: scaleX(1); }
+    }
   </style>
 </head>
 <body>
